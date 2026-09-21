@@ -1,10 +1,12 @@
 import pygame  # noqa: I001
+import sys
 
 from constants import SCREEN_HEIGHT, SCREEN_WIDTH
-from logger import log_state
+from logger import log_state, log_event
 from player import Player
-from asteroidfield import AsteroidField  # noqa: F401
+from asteroidfield import AsteroidField
 from asteroid import Asteroid
+from circleshape import CircleShape
 
 
 
@@ -38,6 +40,12 @@ def main():
 
         screen.fill("black")
         updatable.update(dt)
+        for obj in asteroids:
+            if obj.collides_with(player):
+                log_event("player_hit")
+                print("Game Over!")
+                sys.exit()
+
         for draw in drawable:
             draw.draw(screen)
         pygame.display.flip()
