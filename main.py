@@ -31,7 +31,7 @@ def main():
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
     Shot.containers = (shots, drawable, updatable)
-    player = Player(x, y)  # noqa: F841
+    player = Player(x, y)
     AsteroidField()
 
     while True:
@@ -53,8 +53,7 @@ def main():
                 if bullet.collides_with(obj):
                     log_event("asteroid_shot")
                     bullet.kill()
-                    obj.kill()
-
+                    obj.split()
 
         for draw in drawable:
             draw.draw(screen)
